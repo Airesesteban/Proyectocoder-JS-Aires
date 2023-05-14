@@ -35,7 +35,7 @@ function mostrarPrecio(cod){
 }
 
 function infoPrendas() {
-    let respuesta = confirm("¿Deseas conocer el precio de alguna de nuestras prenda?")
+    let respuesta = confirm("¿Deseas conocer el precio de alguna de nuestras prendas?")
     if (respuesta) {
         let cod = prompt("Ingresa el código numérico de la prenda a consultar guiandose por la lista:")
             if (cod) {
