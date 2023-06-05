@@ -15,13 +15,13 @@ function buscarArticuloPorCodigo(codigo){
     return resultado
 }
 
-function VerCarrito(){
+function finalizarOperacion(){
     const compra = new Compra(carrito)
-    alert ("El costo total de tu compra por " + carrito.length + " articulo/s es $" + compra.obtenerSubtotal())
+    alert ("El costo total de tu compra por " + carrito.length + " articulo/s es $" + compra.obtenerSubtotal() + " ,si abona de contado el precio final es $" + (compra.obtenerSubtotal()*0.9))
 }
 
 function SeleccionDeOpcion(){
-    let respuesta = confirm("presione aceptar si ya sabe el codigo del producto, o cancelar , para ver la lista de articulos disponibles")
+    let respuesta = confirm("Presione ACEPTAR si ya sabe el codigo del producto, o CANCELAR para ver la lista de artículos disponibles")
     if (respuesta === true){
         comprar()
     } else {
@@ -41,7 +41,7 @@ function comprar(){
         if (respuesta === true){
             comprar()
         } else {
-            VerCarrito()
+            finalizarOperacion()
         }
     } else {
         alert("Error en el codigo ingresado. Refresca la pagina para comenzar de nuevo por favor" )
