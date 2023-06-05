@@ -4,10 +4,7 @@ class Compra {
     }
     obtenerSubtotal() {
         if (this.carrito.length > 0) { 
-            return this.carrito.reduce((acc, prenda)=> acc + prenda.precio, 0)
+            return this.carrito.reduce((acc, articulo)=> acc + articulo.precio, 0)
         }
-    }
-    obtenerTotalDeArticulos(){
-        return this.carrito.length
-    }
+    }  
 }
