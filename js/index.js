@@ -17,14 +17,6 @@ const filtrarProductos = ()=> {
 }
 inputSearch.addEventListener("keypress", filtrarProductos)
 
-const cargarProductos = (array)=> {
-    container.innerHTML = ''
-    array.forEach((producto) => {
-        container.innerHTML += returnCardHTML(producto)
-    })
-    activarClickEnBotones()
-}
-
 function activarClickEnBotones() {
     const botones = document.querySelectorAll('button.button.button-outline')
           for (let boton of botones) { 
@@ -36,14 +28,24 @@ function activarClickEnBotones() {
           }
 }
 
-cargarProductos(articulos)
+const cargarProductos = (array)=> {
+    container.innerHTML = ''
+    array.forEach((producto) => {
+        container.innerHTML += returnCardHTML(producto)
+    })
+    activarClickEnBotones()
+}
+
+
 
 function finalizarCompra() {
     if(carritoProductos.length >0){
-    const shopping = new Compra(carritoProductos)
-    let resultado = "El total de su carrito provisorio es de $" + shopping.obtenerSubtotal()
+    const carroProvisorio = new Compra(carritoProductos)
+    let resultado = "El total de su carrito provisorio es de $" + carroProvisorio.obtenerSubtotal()
     document.getElementById('carrito').innerHTML = resultado
 }
 }
+
+cargarProductos(articulos)
 finalizarCompra()
 
