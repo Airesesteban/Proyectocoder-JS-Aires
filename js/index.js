@@ -1,36 +1,14 @@
 const container = document.querySelector('div.container#container')
 const inputSearch = document.querySelector('input#inputSearch')
 
-function retornoCardHTML(producto) {
-    return `<div class="div-card">
+function returnCardHTML(producto) {
+    return `<div class="div-card bg-color">
                 <div class="prenda"><p>${producto.nombre}</p></div>
                 <div class="importe"><p>$ ${producto.precio}</p></div>
-                <div class="comprar"><button id="${producto.codigo}" class="button button-outline">add</button></div>
+                <div class="comprar"><button id="${producto.codigo}" class="button button-outline">Agregar al carrito</button></div>
             </div>`
-}
- 
-function retornoCardError() {
-    return `<div class="card-error">
-                <h2>🔍</h2>
-                <h2>Houston, tenemos un problema.</h2>
-                <h3>No encontramos productos para mostrar.</h3>
-                <h4>Intenta de nuevo en unos instantes...</h4>
-            </div>`
-}
+}            
 
-/* const armarFila = (carritoProductos) =>{
-     return `<tr>
-     <td class="class-table-number">${prod.codigo}</td>
-     <td>${prod.nombre}</td>
-     <td>$ ${prod.precio}</td>
- </tr>`
-}
-const cargarCarrito = (carritoProductos)=> {
-    tableBody.innerHTML = ''
-    array.forEach((producto) => {
-        tableBody.innerHTML += armarFila(carritoProductos)
-    })
-} */
 const filtrarProductos = ()=> {
     let arrayResultado = articulos.filter((producto)=> producto.nombre.toLowerCase().includes(inputSearch.value.trim().toLowerCase()))
     if (arrayResultado.length > 0) {
@@ -42,7 +20,7 @@ inputSearch.addEventListener("keypress", filtrarProductos)
 const cargarProductos = (array)=> {
     container.innerHTML = ''
     array.forEach((producto) => {
-        container.innerHTML += retornoCardHTML(producto)
+        container.innerHTML += returnCardHTML(producto)
     })
     activarClickEnBotones()
 }
@@ -59,4 +37,13 @@ function activarClickEnBotones() {
 }
 
 cargarProductos(articulos)
+
+function finalizarCompra() {
+    if(carritoProductos.length >0){
+    const shopping = new Compra(carritoProductos)
+    let resultado = "El total de su carrito provisorio es de $" + shopping.obtenerSubtotal()
+    document.getElementById('carrito').innerHTML = resultado
+}
+}
+finalizarCompra()
 
