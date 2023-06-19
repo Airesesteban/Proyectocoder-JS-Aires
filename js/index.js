@@ -1,50 +1,62 @@
-const carrito = []
-const articulos = [{nombre: 'Buzo bebe botones caramelo', codigo: 1,  precio: 6500},
-{nombre: 'Body boton blanco', codigo: 2, precio: 3500},
-{nombre: 'Short verde agua', codigo: 3, precio: 2800},
-{nombre: 'Leggin bebe caramelo', codigo: 4, precio: 3600},
-{nombre: 'Vestido gala bolados rosa', codigo: 5, precio: 3500},
-{nombre: 'Dormilon rosa con cierre', codigo: 6, precio: 5000},
-{nombre: 'Body puercoespin verde militar', codigo: 7, precio: 3900},
-{nombre: 'Buzo bebe pitucones gris', codigo: 8, precio: 3200},
-{nombre: 'Vestido gaza bolados azul', codigo: 9, precio: 3500}]
+const container = document.querySelector('div.container#container')
+const inputSearch = document.querySelector('input#inputSearch')
 
-
-function buscarArticuloPorCodigo(codigo){
-    let resultado = articulos.find((articulo)=> articulo.codigo === parseInt(codigo) )
-    return resultado
+function retornoCardHTML(producto) {
+    return `<div class="div-card">
+                <div class="prenda"><p>${producto.nombre}</p></div>
+                <div class="importe"><p>$ ${producto.precio}</p></div>
+                <div class="comprar"><button id="${producto.codigo}" class="button button-outline">add</button></div>
+            </div>`
+}
+ 
+function retornoCardError() {
+    return `<div class="card-error">
+                <h2>🔍</h2>
+                <h2>Houston, tenemos un problema.</h2>
+                <h3>No encontramos productos para mostrar.</h3>
+                <h4>Intenta de nuevo en unos instantes...</h4>
+            </div>`
 }
 
-function finalizarOperacion(){
-    const compra = new Compra(carrito)
-    alert ("El costo total de tu compra por " + carrito.length + " articulo/s es $" + compra.obtenerSubtotal() + " ,si abona de contado el precio final es $" + (compra.obtenerSubtotal()*0.9))
+/* const armarFila = (carritoProductos) =>{
+     return `<tr>
+     <td class="class-table-number">${prod.codigo}</td>
+     <td>${prod.nombre}</td>
+     <td>$ ${prod.precio}</td>
+ </tr>`
 }
-
-function SeleccionDeOpcion(){
-    let respuesta = confirm("Presione ACEPTAR si ya sabe el codigo del producto, o CANCELAR para ver la lista de artículos disponibles")
-    if (respuesta === true){
-        comprar()
-    } else {
-        alert("codigo: 1,'Buzo bebe botones caramelo', precio: $6500 , codigo: 2,'Body boton blanco', precio: $3500 , codigo: 3,'Short verde agua', precio: $2800, codigo: 4,'Leggin bebe caramelo', precio: $3600, codigo: 5,'Vestido gala bolados rosa', precio: $3500, codigo: 6,'Dormilon rosa con cierre', precio: $5000, codigo: 7,'Body puercoespin verde militar', precio: $3900, codigo: 8,'Buzo bebe pitucones gris', precio: $3200, codigo: 9,'Vestido gaza bolados azul', precio: $3500")   
-        comprar()
-    }
-
-}
-
-function comprar(){
-    let codigo = prompt("Ingresa el codigo (del 1 al 9) de tu articulo de interes")
-    let articuloSeleccionado = buscarArticuloPorCodigo(codigo)
-    if(articuloSeleccionado !== undefined){
-        carrito.push(articuloSeleccionado)
-        alert(articuloSeleccionado.nombre + " se agrego a tu carrito")
-        let respuesta = confirm("¿Desea agregar otra prenda a su carrito?")
-        if (respuesta === true){
-            comprar()
-        } else {
-            finalizarOperacion()
-        }
-    } else {
-        alert("Error en el codigo ingresado. Refresca la pagina para comenzar de nuevo por favor" )
+const cargarCarrito = (carritoProductos)=> {
+    tableBody.innerHTML = ''
+    array.forEach((producto) => {
+        tableBody.innerHTML += armarFila(carritoProductos)
+    })
+} */
+const filtrarProductos = ()=> {
+    let arrayResultado = articulos.filter((producto)=> producto.nombre.toLowerCase().includes(inputSearch.value.trim().toLowerCase()))
+    if (arrayResultado.length > 0) {
+        cargarProductos(arrayResultado)
     }
 }
-SeleccionDeOpcion()
+inputSearch.addEventListener("keypress", filtrarProductos)
+
+const cargarProductos = (array)=> {
+    container.innerHTML = ''
+    array.forEach((producto) => {
+        container.innerHTML += retornoCardHTML(producto)
+    })
+    activarClickEnBotones()
+}
+
+function activarClickEnBotones() {
+    const botones = document.querySelectorAll('button.button.button-outline')
+          for (let boton of botones) { 
+                boton.addEventListener('click', ()=> { 
+                    let prendaElegida = articulos.find((prenda)=> prenda.codigo === parseInt(boton.id))
+                    carritoProductos.push(prendaElegida)
+                    guardarEnLocalStorage()
+                })
+          }
+}
+
+cargarProductos(articulos)
+

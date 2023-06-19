@@ -10,3 +10,37 @@ body {
     font-size: 2rem;
     color: #BD6808;
 }
+
+.container {
+    gap: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.div-card {
+    display: flexbox;
+    margin: 6px;
+    padding: 2px;
+    text-align: center;
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: lightblue;
+    box-shadow: 10px 6px 6px rgba(211, 211, 211, 0.221);
+    width: 220px;
+    height: 250px;
+}
+
+div.card-error {
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: whitesmoke;
+    background-color: darkred;
+    box-shadow: 6px 8px 8px darkslategrey;
+}
