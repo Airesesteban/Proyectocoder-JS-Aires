@@ -17,6 +17,14 @@ const filtrarProductos = ()=> {
 }
 inputSearch.addEventListener("keypress", filtrarProductos)
 
+function finalizarCompra() {
+    if(carritoProductos.length >0){
+    const carroProvisorio = new Compra(carritoProductos)
+    let resultado = "El total de su carrito provisorio es de $" + carroProvisorio.obtenerSubtotal()
+    document.getElementById('carrito').innerHTML = resultado
+}
+}
+
 function activarClickEnBotones() {
     const botones = document.querySelectorAll('button.button.button-outline')
           for (let boton of botones) { 
@@ -24,6 +32,7 @@ function activarClickEnBotones() {
                     let prendaElegida = articulos.find((prenda)=> prenda.codigo === parseInt(boton.id))
                     carritoProductos.push(prendaElegida)
                     guardarEnLocalStorage()
+                    finalizarCompra()
                 })
           }
 }
@@ -37,15 +46,5 @@ const cargarProductos = (array)=> {
 }
 
 
-
-function finalizarCompra() {
-    if(carritoProductos.length >0){
-    const carroProvisorio = new Compra(carritoProductos)
-    let resultado = "El total de su carrito provisorio es de $" + carroProvisorio.obtenerSubtotal()
-    document.getElementById('carrito').innerHTML = resultado
-}
-}
-
 cargarProductos(articulos)
-finalizarCompra()
 
