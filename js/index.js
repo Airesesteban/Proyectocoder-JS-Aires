@@ -1,7 +1,7 @@
 const container = document.querySelector('div.container#container')
 const inputSearch = document.querySelector('input#inputSearch')
 
-function returnCardHTML(producto) {
+function retornarCard(producto) {
     return `<div class="div-card bg-color">
                 <div class="prenda"><p>${producto.nombre}</p></div>
                 <div class="importe"><p>$ ${producto.precio}</p></div>
@@ -10,9 +10,9 @@ function returnCardHTML(producto) {
 }            
 
 const filtrarProductos = ()=> {
-    let arrayResultado = articulos.filter((producto)=> producto.nombre.toLowerCase().includes(inputSearch.value.trim().toLowerCase()))
-    if (arrayResultado.length > 0) {
-        cargarProductos(arrayResultado)
+    let resultado = articulos.filter((producto)=> producto.nombre.toLowerCase().includes(inputSearch.value.trim().toLowerCase()))
+    if (resultado.length > 0) {
+        cargarProductos(resultado)
     }
 }
 inputSearch.addEventListener("keypress", filtrarProductos)
@@ -20,9 +20,9 @@ inputSearch.addEventListener("keypress", filtrarProductos)
 function finalizarCompra() {
     if(carritoProductos.length >0){
     const carroProvisorio = new Compra(carritoProductos)
-    let resultado = "El total de su carrito provisorio es de $" + carroProvisorio.obtenerSubtotal()
+    let resultado = "El monto total de su carrito es de $" + carroProvisorio.obtenerSubtotal()
     document.getElementById('carrito').innerHTML = resultado
-}
+    }
 }
 
 function activarClickEnBotones() {
@@ -40,11 +40,9 @@ function activarClickEnBotones() {
 const cargarProductos = (array)=> {
     container.innerHTML = ''
     array.forEach((producto) => {
-        container.innerHTML += returnCardHTML(producto)
+        container.innerHTML += retornarCard(producto)
     })
     activarClickEnBotones()
 }
 
-
 cargarProductos(articulos)
-
