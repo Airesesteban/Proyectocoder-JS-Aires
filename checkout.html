@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,29 +11,19 @@
     <script src="js/variables.js"></script>
     <script src="js/Compra.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script defer src="js/index.js"></script>
-    
+    <script defer src="js/checkout.js"></script>
 </head>
 <body>
     <header>
-        <a href="#" class="mr-auto p-2">
+        <a href="../index.html">
             <img src="images/Marena banner.png" class="img-fluid" alt="imagen header">
-        </a> 
+        </a>
     </header>
-    <h1>Tu tienda de ropa para bebes</h1>
-    <p>Selecciona tu(s) producto(s) de interés. Agregalos a tu carrito</p>
-    <hr>
-    <div class="row">
-        <div class="col-10">
-            <input type="search"id="inputSearch" placeholder="Nombre del producto a buscar">
-        </div>
-        <div class="col-2 d-flex justify-content-end">
-            <a href="checkout.html"><img id="logo" src="images/carrito-de-compras.png" width="50px" title="Ir a Checkout"></a>
-        </div>
-    </div>
-    <main>
-        <div class="container" id="container"></div>
-        <div  id="carrito"></div>
-    </main>    
+    <div class="container bg-color" id ="containerGrid">
+        <div class="producto"></div>
+        <div class="codigo"></div>
+        <div class="precio"></div>
+    </div>  
+    <button class="button" id="btnComprar">COMPRAR</button>       
 </body>
 </html>
