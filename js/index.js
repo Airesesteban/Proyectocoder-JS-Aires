@@ -1,5 +1,5 @@
-const container = document.querySelector('div.container#container')
-const inputSearch = document.querySelector('input#inputSearch')
+const container = document.querySelector('#container')
+const inputSearch = document.querySelector('#inputSearch')
 
 function retornarCard(producto) {
     return `<div class="card" style="width: 18rem;">
@@ -11,7 +11,7 @@ function retornarCard(producto) {
             </div>`
 }
 
-const cargarProductos = (array)=> {
+const cargarProductos = (array = articulos)=> {
     container.innerHTML = ''
     array.forEach((producto) => {
         container.innerHTML += retornarCard(producto)
@@ -25,26 +25,37 @@ const filtrarProductos = ()=> {
         cargarProductos(resultado)
     }
 }
-inputSearch.addEventListener("keypress", filtrarProductos)
-
-function finalizarCompra() {
-    if(carritoProductos.length >0){
-    const carroProvisorio = new Compra(carritoProductos)
-    let resultado = "El monto total de su carrito es de $" + carroProvisorio.obtenerSubtotal()
-    document.getElementById('carrito').innerHTML = resultado
-    }
-}
+inputSearch.addEventListener("input", filtrarProductos)
 
 function activarClickEnBotones() {
     const botones = document.querySelectorAll('button.button.button-outline')
           for (let boton of botones) { 
                 boton.addEventListener('click', ()=> { 
-                    let prendaElegida = articulos.find((prenda)=> prenda.codigo === parseInt(boton.id))
+                    let prendaElegida = articulos.find((prenda)=> parseInt(prenda.codigo) === parseInt(boton.id))
                         carritoProductos.push(prendaElegida)
                         guardarEnLocalStorage()
-                        finalizarCompra()
+                        notificar(`El articulo "${prendaElegida.nombre}" se agregó al carrito.`)
                 })
           }
 }
+function notificar(mensaje) {
+    Toastify({
+        text: mensaje,
+        duration: 3500,
+        close: true,
+        gravity: "top",
+        position: "right",
+        style: {
+          background: "#624A8A",
+          color: "white"
+        }
+      }).showToast();
+}
 
-cargarProductos(articulos)
+function extraerProductos() {
+    fetch(URL)
+        .then((response)=> response.json())
+        .then((data)=> articulos.push(...data))
+        .then(()=>cargarProductos())
+}
+extraerProductos()
