@@ -7,6 +7,7 @@
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
     <title>Marena - Ropa para bebes</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -16,25 +17,24 @@
     <script defer src="js/index.js"></script>
     
 </head>
-<body>
+<body class="bg-color-amarillo">
     <header>
-        <a href="#" class="mr-auto p-2">
-            <img src="images/Marena banner.png" class="img-fluid" alt="imagen header">
+        <a href="#" class="mr-auto">
+            <img src="images/marena_banner.png" class="img-fluid" alt="imagen header">
         </a> 
     </header>
-        <div>
-            <div class="imagen-carrito">
-                <a href="checkout.html"><img id="logo" src="images/carrito-de-compras.png" width="50px" title="Ir a Checkout"></a>
-            </div>
-            <h1>Tu tienda de ropa para bebes</h1>
-            <p>Busca los productos de tu interés y agregalos a tu carrito</p>
-    
+    <div class="m-4">
+        <div class="imagen-carrito">
+            <a href="checkout.html"><img id="logo" src="images/carrito-de-compras.png" width="50px" title="Ir a Checkout"></a>
         </div>
-        <div>
-            <input type="search"id="inputSearch" placeholder="Nombre del producto a buscar">
-        </div>
-    <main>
-        <div class="container" id="container"></div>
+        <h1>Tu tienda de ropa para bebes</h1>
+        <p>Busca los productos de tu interés y agregalos a tu carrito</p>
+    </div>
+    <div class="m-4 pt-2">
+        <input type="search"id="inputSearch" placeholder="Nombre del producto a buscar">
+    </div>
+    <main class="bg-color">
+        <div class="container container-fluid p-4" id="container"></div>
     </main>    
 </body>
 </html>

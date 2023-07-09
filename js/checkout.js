@@ -2,10 +2,9 @@ const grid = document.querySelector("#containerGrid")
 
 function checkoutProduct(carritoProducto) {
     return `<div class="containerGrid">
-            <img class="card-img-top" src="${carritoProducto.imagen}">
+            <img class="imagen" src="${carritoProducto.imagen}">
             <div class="producto"><p>${carritoProducto.nombre}</p></div>
-            <div class="codigo"><p>${carritoProducto.codigo}</p></div>
-            <div class="precio"><p>${carritoProducto.precio}</p></div>
+            <div class="precio"><p>$${carritoProducto.precio}</p></div>
             </div>`
 }
 
@@ -20,10 +19,12 @@ const compraCorrecta = () => {
         title: 'Gracias por su compra!',
         text: 'Puedes volver a la pagina principal para seguir viendo nuestros productos',
         icon: 'success',
-        confirmButtonText: '✔'
+        confirmButtonText: '✔',
+        confirmButtonColor: "#4A08BD"
       })
       localStorage.clear();
 }
+
 const boton=document.querySelector('#btnComprar')
 boton.addEventListener('click', compraCorrecta)
 

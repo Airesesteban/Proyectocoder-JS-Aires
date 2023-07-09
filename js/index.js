@@ -7,8 +7,34 @@ function retornarCard(producto) {
             <div class="card-body">
             <h5 class="card-title">${producto.nombre}</h5>
             <p class="card-text">$ ${producto.precio}</p>
-            <div class="comprar"><button id="${producto.codigo}" class="button button-outline">Agregar al carrito</button></div>
+            <div class="comprar"><button id="${producto.codigo}" class="button-outline">Agregar al carrito</button></div>
             </div>`
+}
+
+function notificar(mensaje) {
+    Toastify({
+        text: mensaje,
+        duration: 3500,
+        close: true,
+        gravity: "top",
+        position: "right",
+        style: {
+          background: "#624A8A",
+          color: "white"
+        }
+      }).showToast();
+}
+
+function activarClickEnBotones() {
+    const botones = document.querySelectorAll('button.button-outline')
+    for (let boton of botones) { 
+        boton.addEventListener('click', ()=> { 
+            let prendaElegida = articulos.find((prenda)=> parseInt(prenda.codigo) === parseInt(boton.id))
+            carritoProductos.push(prendaElegida)
+            guardarEnLocalStorage()
+            notificar(`El articulo "${prendaElegida.nombre}" se agregó al carrito.`)
+                })
+          }
 }
 
 const cargarProductos = (array = articulos)=> {
@@ -25,32 +51,8 @@ const filtrarProductos = ()=> {
         cargarProductos(resultado)
     }
 }
-inputSearch.addEventListener("input", filtrarProductos)
 
-function activarClickEnBotones() {
-    const botones = document.querySelectorAll('button.button.button-outline')
-          for (let boton of botones) { 
-                boton.addEventListener('click', ()=> { 
-                    let prendaElegida = articulos.find((prenda)=> parseInt(prenda.codigo) === parseInt(boton.id))
-                        carritoProductos.push(prendaElegida)
-                        guardarEnLocalStorage()
-                        notificar(`El articulo "${prendaElegida.nombre}" se agregó al carrito.`)
-                })
-          }
-}
-function notificar(mensaje) {
-    Toastify({
-        text: mensaje,
-        duration: 3500,
-        close: true,
-        gravity: "top",
-        position: "right",
-        style: {
-          background: "#624A8A",
-          color: "white"
-        }
-      }).showToast();
-}
+inputSearch.addEventListener("input", filtrarProductos)
 
 function extraerProductos() {
     fetch(URL)
@@ -58,4 +60,5 @@ function extraerProductos() {
         .then((data)=> articulos.push(...data))
         .then(()=>cargarProductos())
 }
+
 extraerProductos()
